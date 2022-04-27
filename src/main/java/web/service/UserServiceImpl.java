@@ -37,4 +37,21 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(int id) {
         userDao.deleteUser(id);
     }
+      @Override
+    @Transactional
+    public void saveUser(User user) {
+        entityManager.persist(user);
+    }
+
+    @Override
+    @Transactional
+    public void updateUser(User user) {
+        entityManager.merge(user);
+    }
+
+    @Override
+    @Transactional
+    public void deleteUser(int id) {
+        entityManager.remove(entityManager.find(User.class, id));
+    }
 }
