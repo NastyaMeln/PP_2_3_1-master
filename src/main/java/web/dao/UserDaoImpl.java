@@ -16,19 +16,23 @@ public class UserDaoImpl implements UserDao{
     private EntityManager entityManager;
 
    @Override
+    @Transactional
     public void saveUser(User user) {
         entityManager.persist(user);
     }
 
     @Override
+    @Transactional
     public void updateUser(User user) {
         entityManager.merge(user);
     }
 
     @Override
+    @Transactional
     public void deleteUser(int id) {
         entityManager.remove(entityManager.find(User.class, id));
     }
+    
     @Override
     public List<User> getUsers() {
         String jpql = "SELECT u FROM User u";
